@@ -76,11 +76,8 @@ def ProcessDisplay(directory):
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             continue
 
-    if listProcess:
         CreateLog(listProcess)
-    else:
-        print("No matching processes found running from this directory.")
-               
+     
 
 def CreateLog(Data):
     Dir="Marvellous"
