@@ -80,7 +80,9 @@ def DeleteDuplicate(Path="Marvellous"):
      EndTime=time.time()
      diff=EndTime-StartTime
      print("Total Execution time is :",diff)
-     CreateLog(Files,diff)
+     #  CreateLog(Files,diff)
+     log_file = CreateLog(Files, diff)
+     return log_file
 
     
 def CreateLog(Files,diff):
@@ -173,7 +175,8 @@ def main():
                 Dir=sys.argv[1]
                 vel=int(sys.argv[2])
                 mail=sys.argv[3]
-                schedule.every(vel).minutes.do(DeleteDuplicate,Dir,mail)
+                # schedule.every(vel).minutes.do(DeleteDuplicate,Dir,mail)
+                schedule.every(vel).minutes.do(lambda: SendMail(DeleteDuplicate(Dir), mail))
 
                 while True:
                     schedule.run_pending()
